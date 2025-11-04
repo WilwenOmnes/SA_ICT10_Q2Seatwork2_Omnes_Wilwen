@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Grade Calculator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.5.2/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.5.2/core.js"></script>
+
+  <style>
+    :root {
+      --cyan: #00ffff;
+      --pink: #ff69b4;
+      --purple: #8000ff;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--cyan), var(--pink), var(--purple));
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      padding: 20px;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      max-width: 1100px;
+      background: rgba(50, 50, 50, 0.7);
+      padding: 50px;
+      border-radius: 25px;
+      box-shadow: 0 0 30px rgba(128, 0, 255, 0.5);
+    }
+
+    h1 {
+      color: var(--cyan);
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: bold;
+      text-shadow: 0 0 5px var(--pink);
+    }
+
+    h2 {
+      color: var(--pink);
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .form-control {
+      margin-bottom: 15px;
+      border: 1px solid var(--purple);
+      background-color: rgba(255,255,255,0.9);
+      color: black;
+    }
+
+    .form-control:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 0.25rem rgba(0, 255, 255, 0.4);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      border: none;
+      width: 50%;
+      padding: 12px;
+      margin: 30px auto 0;
+      display: block;
+      font-weight: bold;
+      color: white;
+      transition: 0.3s;
+      border-radius: 8px;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(90deg, var(--pink), var(--cyan));
+      transform: scale(1.05);
+    }
+
+    .input-group-text {
+      background-color: var(--purple);
+      color: white;
+      border: 1px solid var(--purple);
+      min-width: 140px;
+      justify-content: center;
+    }
+
+    .info-section, .grades-section {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 15px;
+      flex: 1;
+      min-width: 350px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .grades-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 30px;
+    }
+
+    #student_info, #summary, #output {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    #output {
+      font-size: 1.3rem;
+      color: var(--cyan);
+      font-weight: bold;
+      padding: 15px;
+      background-color: rgba(0, 255, 255, 0.15);
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Grade Calculator</h1>
+
+    <div class="row">
+      <div class="info-section col-md-6">
+        <h2>Personal Information</h2>
+        <div class="input-group">
+          <span class="input-group-text">First Name</span>
+          <input type="text" class="form-control" id="first_name" placeholder="Ex. Nazuna" required>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text">Last Name</span>
+          <input type="text" class="form-control" id="last_name" placeholder="Ex. Nanakusa" required>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text">Institution</span>
+          <input type="text" class="form-control" id="institution" placeholder="Ex. OBMC" required>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text">Grade & Section</span>
+          <input type="text" class="form-control" id="grade_section" placeholder="Ex. 9 - A" required>
+        </div>
+      </div>
+
+      <div class="grades-section col-md-6">
+        <h2>Subject Grades</h2>
+        <div class="grades-grid">
+          <div class="input-group">
+            <span class="input-group-text">Science</span>
+            <input type="number" class="form-control" id="science" placeholder="60-100" min="60" max="100" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">Math</span>
+            <input type="number" class="form-control" id="math" placeholder="60-100" min="60" max="100" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">English</span>
+            <input type="number" class="form-control" id="english" placeholder="60-100" min="60" max="100" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">Filipino</span>
+            <input type="number" class="form-control" id="filipino" placeholder="60-100" min="60" max="100" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">SS</span>
+            <input type="number" class="form-control" id="ss" placeholder="60-100" min="60" max="100" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">PE</span>
+            <input type="number" class="form-control" id="pe" placeholder="60-100" min="60" max="100" required>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" py-click="general_weighted_average">Calculate GWA</button>
+
+    <div id="student_info"></div>
+    <pre id="summary"></pre>
+    <div id="output"></div>
+  </div>
+
+  <py-config>
+    packages = []
+    [[fetch]]
+    files = ["main.py"]
+  </py-config>
+
+  <py-script src="main.py"></py-script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
